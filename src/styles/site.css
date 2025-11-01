@@ -1,0 +1,1707 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Satoshi Font Face Declarations */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/Satoshi-BlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Common utilities (no inline styles) */
+
+/* Hero background image */
+.hero-section {
+  background-image: url('/assets/banner-1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Radial overlay */
+.hero-overlay {
+  background: radial-gradient(88% 175% at 12% 15%, rgb(0 19 25 / 65%) 26%, rgba(0, 79, 107, 0.9) 100%);
+}
+
+/* Blur ellipses */
+.hero-ellipse-teal {
+  background-color: rgb(22, 103, 130);
+  filter: blur(152px);
+  opacity: 0.16;
+}
+.hero-ellipse-yellow {
+  background-color: rgb(249, 184, 6);
+  filter: blur(176px);
+  opacity: 0.09;
+}
+
+/* Satoshi heading base */
+.hero-heading {
+  font-family: 'Satoshi';
+  font-weight: 100;
+  letter-spacing: 0;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* Separate class for Turnaround text */
+.hero-heading-turnaround {
+  font-family: 'Satoshi';
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* Gradient CTA */
+.btn-gradient {
+  background: linear-gradient(92.7348deg, rgb(34,155,195) 0%, rgb(19,86,108) 100%);
+  transition: transform 300ms ease, filter 300ms ease, background-color 300ms ease;
+}
+.btn-gradient:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+/* Satoshi italic uppercase heading (70px, 110% line-height) */
+.heading-competencies {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 50px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+}
+.heading-competencies1 {
+  font-family: 'Satoshi';
+  /* font-style: italic; */
+  font-weight: 300;
+  font-size: 50px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+/* Satoshi italic uppercase right-aligned (70px) for ONE-STOP SOLUTION */
+.heading-onestop {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 50px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: right;
+  color: #08222b;
+}
+.heading-onestop1 {
+  font-family: 'Satoshi';
+  /* font-style: italic; */
+  font-weight: 300;
+  font-size: 50px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: right;
+  color: #08222b;
+}
+
+/* Footer gradient headings like reference */
+.footer-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.faster-turnarounds-heading {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 60px;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 100%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(330deg, rgb(23, 103, 130) 25%, rgb(15, 69, 87) 76%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.faster-turnarounds-assured {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.footer-section-heading {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.footer-grad-1 {
+  background-image: linear-gradient(330deg, rgb(23, 103, 130) 25%, rgb(15, 69, 87) 76%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.footer-grad-2 {
+  background-image: linear-gradient(330deg, rgb(31, 137, 173) 35%, rgb(23, 103, 130) 63%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Secondary outline button (dark text) with transparent gradient like reference */
+.btn-outline-gradient-dark {
+  background: linear-gradient(92.7348deg, rgba(22, 99, 126, 0) 0%, rgba(12, 53, 67, 0) 100%);
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: #08222b;
+  border-radius: 4px;
+  transition: transform 300ms ease, background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+.btn-outline-gradient-dark:hover { transform: translateY(-2px); }
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal.delay-100 { transition-delay: 100ms; }
+.reveal.delay-300 { transition-delay: 300ms; }
+.reveal.delay-500 { transition-delay: 500ms; }
+
+/* Hover/press motion for CTAs */
+.cta-motion {
+  transition: transform 300ms ease, background-color 300ms ease, color 300ms ease, border-color 300ms ease, opacity 300ms ease;
+}
+.cta-motion:hover { transform: translateY(-2px); }
+.cta-motion:active { transform: translateY(0); }
+.reveal-up {
+  transform: translateY(24px);
+}
+.reveal-right {
+  transform: translateX(24px);
+}
+.reveal-left {
+  transform: translateX(-24px);
+}
+
+/* Play button gradient background on the SVG img */
+.play-icon {
+  background: linear-gradient(116deg, rgb(22, 99, 126) 22%, rgb(12, 53, 67) 100%);
+  transform: none;
+  transform-origin: 50% 50% 0px;
+  will-change: auto;
+  opacity: 1;
+  border-radius: 72px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon img {
+  width: 20px;
+  height: 24px;
+  display: block;
+}
+
+/* Hero description text */
+.hero-desc {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 140%;
+  text-transform: none;
+}
+
+/* Wrapper constraints */
+.hero-desc-wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+  flex: none;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  position: relative;
+}
+
+/* Partners Section */
+.partners-section {
+  background: linear-gradient(167.802deg, #f0f2f3 0%, #d4dadd 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.partners-cylinder-shape {
+  z-index: 0;
+  flex: none;
+ 
+  height: 467px;
+  position: absolute;
+  top: -112px;
+  right: -128px;
+  will-change: transform;
+  transform: none;
+  opacity: 1;
+}
+
+.partners-component-shape {
+  position: absolute;
+  top: 362px;
+  left: -315px;
+
+  height: 467px;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* Partners heading styles */
+.heading-partners {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  display: block;
+  
+}
+
+.heading-partners-you-can {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  display: block;
+ 
+}
+
+.heading-partners-trust {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 60px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  display: block;
+}
+
+/* Partners description text */
+.partners-desc {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 150%;
+  text-transform: none;
+  color: #08222b;
+  text-align: left;
+}
+
+/* Partners first paragraph - LAXMI description */
+.partners-desc-first {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  letter-spacing: 0px;
+  line-height: 140%;
+  text-transform: none;
+  color: #08222b;
+  text-align: start;
+  margin-bottom: 48px;
+}
+
+/* Partners second and third paragraphs */
+.partners-desc-secondary {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 150%;
+  text-transform: none;
+  color: #08222b;
+  text-align: start;
+  margin-bottom: 20px;
+}
+
+/* Top line divider for secondary paragraphs */
+.partners-desc-top-line {
+  background-color: rgb(156, 170, 175);
+  opacity: 1;
+  will-change: transform;
+  transform: none;
+  transform-origin: 50% 50% 0px;
+  width: 120px;
+  height: 1px;
+  margin-bottom: 20px;
+}
+
+/* Industries Served Section Paragraphs */
+.industries-served-desc {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 140%;
+  text-transform: none;
+  color: #08222b;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Partners divider line */
+.partners-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #9caaaf;
+  opacity: 1;
+}
+
+/* Partners image overlay */
+.partners-image-overlay {
+  background: linear-gradient(-8.71179e-9deg, #08222b 0%, rgba(8, 34, 43, 0.4) 44% 67%, rgba(8, 34, 43, 0.8) 100%);
+  border-radius: 6px;
+}
+
+.partners-expertise-tag {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 130%;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.partners-expertise-heading {
+  font-family: 'Satoshi';
+  font-weight: 300;
+  font-size: 41px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* Our Goal heading specific style */
+.partners-goal-heading {
+  font-size: 24px;
+  line-height: 30px;
+  text-transform: initial;
+}
+
+/* Divider below expertise section */
+.partners-expertise-divider {
+  background-color: rgb(156, 170, 175);
+  opacity: 1;
+  will-change: transform;
+  transform: none;
+  transform-origin: 50% 50% 0px;
+  width: 100%;
+  height: 1px;
+  margin-top: 20px;
+}
+
+/* Partners stats */
+.partners-stat-number {
+  font-family: 'Satoshi';
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.partners-stat-title {
+  font-family: 'Satoshi';
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 120%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.partners-stat-text {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 150%;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Engineered Solutions Section */
+.engineered-solutions-section {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Industry card hover effect */
+.industry-card {
+  transition: transform 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Industries Served Section Headings */
+.heading-industries-served {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #000714;
+  text-align: start;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.heading-custom-solutions {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 400;
+  font-size: 60px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #000714;
+  text-align: start;
+
+  display: block;
+}
+
+.heading-custom-solutions-italic {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 60px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #000714;
+  text-align: start;
+  display: block;
+}
+
+/* Achieving Material Progress Section */
+.achieving-progress-left {
+  background: transparent;
+}
+
+.achieving-progress-right {
+  background: linear-gradient(210deg, rgb(9, 41, 52) 0%, rgb(19, 86, 108) 100%);
+}
+
+.achieving-progress-title h3 {
+  text-align: center;
+}
+
+.achieving-progress-body p {
+  text-align: center;
+}
+
+.achieving-progress-tag {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 140%;
+  color: #ffffff;
+  text-transform: none;
+  text-align: left;
+}
+
+.achieving-progress-counter {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 140%;
+  text-align: left;
+}
+
+.achieving-progress-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Come to Meet Section */
+.come-to-meet-heading {
+  margin-bottom: 40px;
+}
+
+.come-to-meet-heading-text {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  color: #000714;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0;
+}
+.come-to-meet-heading-text1 {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  color: #000714;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0;
+}
+.achieving-progress-heading-main {
+  font-family: "Satoshi";
+  font-size: 50px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.achieving-progress-heading-main1 {
+  font-family: "Satoshi";
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.achieving-progress-heading-secondary {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 32px;
+  letter-spacing: 0px;
+  line-height: 120%;
+  color: #ffffff;
+  text-transform: none;
+}
+
+.achieving-progress-description p {
+  text-align: left;
+}
+
+.achieving-progress-nav-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(156, 170, 175, 1);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.achieving-progress-nav-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.achieving-progress-nav-button svg {
+  width: 6px;
+  height: 16px;
+}
+
+/* ISO Gallery Styles */
+.iso-gallery {
+  width: 100%;
+}
+
+.iso-gallery-title {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+}
+
+.iso-gallery-description {
+  color: white;
+  margin-top: 24px;
+}
+
+.iso-slide-counter {
+  font-family: "Satoshi", "Satoshi Placeholder", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.iso-slide-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+}
+
+.iso-nav-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.iso-nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+}
+
+.iso-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.iso-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+.iso-dot-active {
+  background: rgba(255, 255, 255, 1);
+  width: 12px;
+  height: 12px;
+}
+
+/* Industry Carousel Styles */
+.industry-carousel-container {
+  will-change: transform;
+  flex-flow: row;
+  flex: none;
+  place-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  height: 420px;
+  padding: 0 48px;
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.industry-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.industry-carousel-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.industry-carousel-image {
+  width: 100%;
+  height: calc(100% - 60px);
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.industry-carousel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.industry-carousel-card:hover .industry-carousel-image img {
+  transform: scale(1.05);
+}
+
+.industry-carousel-title {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: transparent;
+}
+
+.industry-carousel-title-text {
+  font-family: 'Satoshi';
+  font-size: 51px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  color: #08222b;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .industry-carousel-card {
+    width: 650px;
+    flex-shrink: 0;
+  }
+}
+
+/* Quote Form Styles */
+.form-section {
+  background-color: #f5f9fa;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.quote-form {
+  width: 100%;
+}
+
+.form-description {
+  margin-bottom: 24px;
+}
+
+.form-description p {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #08222b;
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #08222b;
+  margin-bottom: 8px;
+}
+
+.form-label-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.form-label-hidden .required {
+  color: #dc3545;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #08222b;
+  background-color: #ffffff;
+  border: 1px solid #e0e8eb;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #08222b;
+  box-shadow: 0 0 0 3px rgba(8, 34, 43, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #809298;
+}
+
+.form-input-large {
+  font-size: 16px;
+  padding: 14px 16px;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit-container {
+  margin-top: 24px;
+}
+
+.form-submit-button {
+  background-color: #08222b;
+  color: #ffffff;
+  border: none;
+  padding: 14px 32px;
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-submit-button:hover:not(:disabled) {
+  background-color: #0a2d38;
+  transform: translateY(-1px);
+}
+
+.form-submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.form-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Partners Trust Section - Omnis Design */
+.partners-trust-section {
+  background: linear-gradient(167.802deg, #f0f2f3 0%, #d4dadd 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.partners-cylinder-shape {
+  z-index: 0;
+  flex: none;
+  /* width: 622px; */
+  height: 467px;
+  position: absolute;
+  top: -112px;
+  right: -128px;
+  opacity: 1;
+  margin: 0;
+  display: none;
+}
+
+.partners-component-shape {
+  z-index: 0;
+  flex: none;
+  /* width: 622px; */
+  height: 467px;
+  position: absolute;
+  top: 327px;
+  left: -340px;
+  opacity: 1;
+  margin: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .partners-cylinder-shape,
+  .partners-component-shape {
+    display: block;
+  }
+}
+
+.partners-trust-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headings Wrapper */
+.partners-headings-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.partners-heading-you-can {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  margin: 0;
+}
+
+.partners-heading-trust {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 60px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  margin: 0;
+}
+
+/* Left Side Content */
+.partners-content-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.partners-text-block {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+
+.partners-text {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 150%;
+  text-transform: none;
+  color: #08222b;
+  text-align: left;
+  margin: 0;
+}
+
+.partners-text-innovative {
+  font-family: "Manrope", "Manrope Placeholder", sans-serif;
+  /* font-size: 18px; */
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 150%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: none;
+  margin-bottom: 20px;
+  color: #08222b;
+}
+
+.partners-text-laxmi {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 140%;
+  text-transform: none;
+  color: #08222b;
+  text-align: left;
+}
+
+/* Full Width Image with Stats */
+.partners-image-stats-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.partners-image-container {
+  will-change: var(--framer-will-change-override, transform);
+  border-radius: 6px;
+  flex-flow: column;
+  flex: none;
+  place-content: center space-between;
+  align-items: center;
+  width: 100%;
+  height: 860px;
+  padding: 48px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.partners-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.partners-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-8.71179e-9deg, #08222b 0%, rgba(8, 34, 43, 0.4) 44% 67%, rgba(8, 34, 43, 0.8) 100%);
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.partners-image-content {
+  will-change: var(--framer-will-change-override, transform);
+  border-radius: 6px;
+  flex-flow: column;
+  place-content: center space-between;
+  align-items: center;
+  width: 100%;
+  height: 928px;
+  padding: 48px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Top Section - Expertise Full Width, Goal Below */
+.partners-image-top-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: auto;
+}
+
+.partners-expertise-section-fullwidth {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.partners-expertise-section-fullwidth .partners-desc-top-line {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.partners-goal-section-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.partners-expertise-tag-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.partners-expertise-tag {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 130%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.partners-expertise-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 41px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.partners-goal-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: none;
+  color: #ffffff;
+  margin: 0;
+}
+
+.partners-onestop-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-size: 51px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-align: start;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  margin-top: 16px;
+}
+
+/* Stats Grid - Bottom */
+.partners-stats-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+  width: 100%;
+}
+
+.partners-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.partners-stat-number-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0;
+}
+
+.partners-stat-number {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.partners-stat-suffix {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: left;
+  align-self: flex-end;
+}
+
+.partners-stat-title {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 120%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.partners-stat-text {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 150%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+
+/* Responsive */
+@media (max-width: 767px) {
+  .partners-heading-you-can,
+  .partners-heading-trust {
+    font-size: 40px;
+  }
+  
+  .partners-text {
+    font-size: 16px;
+  }
+  
+  .partners-image-container {
+    height: 600px;
+  }
+  
+  .partners-image-content {
+    padding: 32px 24px;
+    height: 600px;
+  }
+  
+  .partners-image-top-section {
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  
+  .partners-goal-section-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .partners-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  .partners-stat-number,
+  .partners-stat-suffix {
+    font-size: 50px;
+  }
+  
+  .partners-expertise-heading {
+    font-size: 32px;
+  }
+}
+
+/* Trustful Partners Section - New Design (Old - keeping for reference) */
+.trustful-partners-section {
+  background: linear-gradient(167.802deg, #f0f2f3 0%, #d4dadd 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.trustful-partners-cylinder-shape {
+  position: absolute;
+  top: -112px;
+  right: -128px;
+  width: 556px;
+  height: 505px;
+  z-index: 0;
+  opacity: 1;
+  margin: 0;
+  display: none;
+}
+
+.trustful-partners-component-shape {
+  position: absolute;
+  top: 362px;
+  left: -315px;
+  width: 542px;
+  height: 472px;
+  z-index: 0;
+  opacity: 1;
+  margin: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .trustful-partners-cylinder-shape,
+  .trustful-partners-component-shape {
+    display: block;
+  }
+}
+
+.trustful-partners-container {
+  position: relative;
+}
+
+.trustful-partners-heading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+
+.trustful-partners-heading-1 {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  display: block;
+  margin: 0;
+}
+
+.trustful-partners-heading-2 {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 60px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  text-align: left;
+  color: #000714;
+  display: block;
+  margin: 0;
+}
+
+.trustful-partners-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .trustful-partners-content-wrapper {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+}
+
+.trustful-partners-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.trustful-partners-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trustful-partners-text {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 150%;
+  text-transform: none;
+  color: #08222b;
+  text-align: left;
+  margin: 0;
+}
+
+.trustful-partners-photo-info {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trustful-partners-image-wrapper {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.trustful-partners-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trustful-partners-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-8.71179e-9deg, #08222b 0%, rgba(8, 34, 43, 0.4) 44% 67%, rgba(8, 34, 43, 0.8) 100%);
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.trustful-partners-info-content {
+  position: relative;
+  z-index: 2;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 600px;
+  justify-content: flex-start;
+}
+
+.trustful-partners-row-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trustful-partners-expertise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trustful-partners-tag {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 130%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.trustful-partners-expertise-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 41px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.trustful-partners-row-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trustful-partners-goal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trustful-partners-goal-heading {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 41px;
+  letter-spacing: 0px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.trustful-partners-stats {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  margin: 0;
+  margin-top: auto;
+  padding-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+}
+
+@media (max-width: 767px) {
+  .trustful-partners-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trustful-partners-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trustful-partners-stat-number-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0;
+}
+
+.trustful-partners-stat-number {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.trustful-partners-stat-suffix {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 70px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: left;
+  align-self: flex-end;
+}
+
+.trustful-partners-stat-title {
+  font-family: 'Satoshi', 'Satoshi Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 120%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.trustful-partners-stat-text {
+  font-family: 'Manrope', 'Manrope Placeholder', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 150%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .trustful-partners-heading-1,
+  .trustful-partners-heading-2 {
+    font-size: 40px;
+  }
+  
+  .trustful-partners-info-content {
+    padding: 32px 24px;
+    min-height: 500px;
+  }
+  
+  .trustful-partners-stat-number,
+  .trustful-partners-stat-suffix {
+    font-size: 50px;
+  }
+  
+  .trustful-partners-expertise-heading,
+  .trustful-partners-goal-heading {
+    font-size: 32px;
+  }
+}
+
+

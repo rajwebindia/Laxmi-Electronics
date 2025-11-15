@@ -410,7 +410,7 @@ const Home = () => {
           {/* Right Block */}
           <div className="relative min-h-[520px] md:h-[800px] overflow-hidden">
             <img
-              src="/assets/images/one-stop-solution.jpg"
+              src="/assets/images/one-stop-solution-1.jpg"
               alt="Ceramic Components"
               className="absolute inset-0 w-full h-full object-cover object-right-top"
             />

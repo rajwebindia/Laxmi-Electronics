@@ -294,26 +294,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Image Section */}
-      <section className="about-us-image-section" id="img-trigger">
-        <div className="about-us-image-wrapper">
-          <figure className="about-us-image-figure" ref={imageFigureRef}>
-            <div className="about-us-image-bg">
-              <img
-                decoding="auto"
-                loading="lazy"
-                width="4000"
-                height="2667"
-                sizes="100vw"
-                srcSet="https://framerusercontent.com/images/DkfHm2nr8vANshPszskYGhtUXrI.webp?scale-down-to=512&width=4000&height=2667 512w,https://framerusercontent.com/images/DkfHm2nr8vANshPszskYGhtUXrI.webp?scale-down-to=1024&width=4000&height=2667 1024w,https://framerusercontent.com/images/DkfHm2nr8vANshPszskYGhtUXrI.webp?scale-down-to=2048&width=4000&height=2667 2048w,https://framerusercontent.com/images/DkfHm2nr8vANshPszskYGhtUXrI.webp?width=4000&height=2667 4000w"
-                src="https://framerusercontent.com/images/DkfHm2nr8vANshPszskYGhtUXrI.webp?width=4000&height=2667"
-                alt="Young engineers working"
-              />
-            </div>
-          </figure>
-          <div className="about-us-image-overlay"></div>
-        </div>
-      </section>
+      
 
       {/* Why Laxmielectronics Section */}
       <section className="about-us-why-section">
@@ -442,83 +423,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="about-us-team-section">
-        <div className="about-us-team-container">
-          <div className="about-us-team-header">
-            <div className="about-us-team-title-wrapper">
-              <div className="about-us-team-title">
-                <h3>Meet the industry</h3>
-              </div>
-              <div className="about-us-team-subtitle">
-                <h3>Experts</h3>
-              </div>
-            </div>
-            <div className="about-us-team-description">
-              <p>With expertise and vision, our leadership team drives innovation, precision, and excellence—shaping the future of advanced manufacturing.</p>
-            </div>
-          </div>
-
-          {/* Divider Line */}
-          <div className="about-us-team-divider">
-            <div className="about-us-team-line"></div>
-          </div>
-
-          {/* Team Members Grid */}
-          <div className="about-us-team-members">
-            {teamMembers.map((member) => (
-              <div 
-                key={member.id} 
-                className="about-us-team-member"
-                onClick={() => setSelectedMember(member)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="about-us-team-member-image">
-                  <figure>
-                    <img
-                      decoding="auto"
-                      loading="lazy"
-                      width="1800"
-                      height="2400"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      srcSet={`${member.imageBase}?scale-down-to=512&width=1800&height=2400 512w,${member.imageBase}?scale-down-to=1024&width=1800&height=2400 1024w,${member.imageBase}?scale-down-to=2048&width=1800&height=2400 2048w,${member.imageBase}?width=1800&height=2400 1800w`}
-                      src={`${member.imageBase}?width=1800&height=2400`}
-                      alt={`Portrait of ${member.name}, ${member.position} at Omnis.`}
-                      onError={(e) => {
-                        console.error('Image failed to load:', member.imageBase);
-                        e.target.style.display = 'none';
-                      }}
-                    />
-                  </figure>
-                </div>
-                <div className="about-us-team-member-info">
-                  <button 
-                    className="about-us-team-linkedin-btn" 
-                    aria-label="LinkedIn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedMember(member);
-                    }}
-                  >
-                    <img
-                      decoding="auto"
-                      loading="lazy"
-                      width="24"
-                      height="24"
-                      src="https://framerusercontent.com/images/6LK5i2MdOVhqo0MNLKRkK0CEU.svg"
-                      alt="LinkedIn"
-                    />
-                  </button>
-                  <div className="about-us-team-member-details">
-                    <h6>{member.name}</h6>
-                    <p>{member.position}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Let's Build the Future Together Section */}
       <section className="about-us-cta-section">

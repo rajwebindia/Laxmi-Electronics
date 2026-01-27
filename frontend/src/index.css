@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation menu styles */
+.navigation-box {
+  display: flex;
+  align-items: center;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.current-menu-item a {
+  color: #f15a22;
+  border-bottom: 2px solid #f15a22;
+}
+
+.menu-item a:hover {
+  color: #f15a22;
+  border-bottom: 2px solid #f15a22;
+}
+
+/* Dropdown menu animations */
+.group:hover .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Mobile menu toggle styles */
+@media (max-width: 768px) {
+  .mbl-show {
+    display: block;
+  }
+  
+  .dsk-hide {
+    display: block;
+  }
+  
+  /* Global p tag styles for mobile */
+  p {
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+
+@media (min-width: 769px) {
+  .mbl-show {
+    display: none;
+  }
+  
+  .dsk-hide {
+    display: none;
+  }
+}
+

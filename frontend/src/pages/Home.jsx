@@ -1016,7 +1016,7 @@ const Home = () => {
             <div className="hidden md:block"></div>
             <div className="partners-content-left">
               {/* First Paragraph */}
-              <div className="partners-text-block mb-4 sm:mb-5 md:mb-6 reveal-text reveal-up delay-200">
+              <div className="partners-text-block pt-6 md:pt-0 mb-4 sm:mb-5 md:mb-6 reveal-text reveal-up delay-200">
                 <p className="partners-text-laxmi text-sm sm:text-base md:text-lg leading-relaxed">
                   LAXMI is a leading manufacturer of silicone and plastic injection molds and components. Our major clients are from the Medical, Pharmaceutical, Aviation, Space and Healthcare industries.
 </p>
@@ -1646,13 +1646,14 @@ const Home = () => {
                   }
                 }}
               >
+                
                 <div className="form-description mb-6">
                   <p>Fill all information details to consult with us to get services from us.</p>
                 </div>
-
+                <p className="quote-form-mandatory-note">* Fields are mandatory</p>
                 <div className="form-field-container space-y-4">
                   {/* Name and Phone on same line */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                     {/* Your Name */}
                     <div className="form-field">
                       <label htmlFor="quote-name" className="form-label-hidden">
@@ -1812,7 +1813,10 @@ const Home = () => {
       {/* Success Modal */}
       <SuccessModal
         isOpen={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
+        onClose={() => {
+          setShowSuccessModal(false);
+          setIsSubmitted(false); // Re-enable form fields when modal is closed
+        }}
         message={successMessage}
         title={successTitle}
       />

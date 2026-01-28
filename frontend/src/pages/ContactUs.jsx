@@ -16,6 +16,17 @@ const formatTextareaForEmail = (text) => {
   return escaped.replace(/\n/g, '<br>');
 };
 
+// Helper function to escape HTML for all text fields
+const escapeHtml = (text) => {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 const ContactUs = () => {
   const fadeInRefs = useRef([]);
   const [formData, setFormData] = useState({
@@ -187,11 +198,11 @@ const ContactUs = () => {
     }
   };
 
-  // Handle city input with validation (max 50 chars, block vulnerable characters)
+  // Handle city input with validation (only letters and spaces, max 50 chars)
   const handleCityChange = (e) => {
     let value = e.target.value;
-    // Block vulnerable characters: <, >, *, =, ;, ~
-    value = value.replace(/[<>*=;~]/g, '');
+    // Only allow letters and spaces
+    value = value.replace(/[^A-Za-z\s]/g, '');
     // Limit to 50 characters
     value = value.slice(0, 50);
     setFormData(prev => ({
@@ -207,11 +218,11 @@ const ContactUs = () => {
     }
   };
 
-  // Handle state input with validation (max 50 chars, block vulnerable characters)
+  // Handle state input with validation (only letters and spaces, max 50 chars)
   const handleStateChange = (e) => {
     let value = e.target.value;
-    // Block vulnerable characters: <, >, *, =, ;, ~
-    value = value.replace(/[<>*=;~]/g, '');
+    // Only allow letters and spaces
+    value = value.replace(/[^A-Za-z\s]/g, '');
     // Limit to 50 characters
     value = value.slice(0, 50);
     setFormData(prev => ({
@@ -571,19 +582,15 @@ const ContactUs = () => {
     // City validation
     if (!formData.city.trim()) {
       errors.city = 'City is required';
-    } else if (formData.city.length > 50) {
-      errors.city = 'City must not exceed 50 characters';
-    } else if (/[<>*=;~]/.test(formData.city)) {
-      errors.city = 'Characters <, >, *, =, ;, ~ are not allowed';
+    } else if (!/^[A-Za-z\s]{2,50}$/.test(formData.city.trim())) {
+      errors.city = 'City must be 2-50 characters and contain only letters and spaces';
     }
     
     // State validation
     if (!formData.state.trim()) {
       errors.state = 'State is required';
-    } else if (formData.state.length > 50) {
-      errors.state = 'State must not exceed 50 characters';
-    } else if (/[<>*=;~]/.test(formData.state)) {
-      errors.state = 'Characters <, >, *, =, ;, ~ are not allowed';
+    } else if (!/^[A-Za-z\s]{2,50}$/.test(formData.state.trim())) {
+      errors.state = 'State must be 2-50 characters and contain only letters and spaces';
     }
     
     // Requirement validation
@@ -640,7 +647,13 @@ const ContactUs = () => {
     }
     
     setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    
+    // Return validation result and first error field name
+    const errorKeys = Object.keys(errors);
+    return {
+      isValid: errorKeys.length === 0,
+      firstErrorField: errorKeys.length > 0 ? errorKeys[0] : null
+    };
   };
 
   // Send email notifications
@@ -662,66 +675,66 @@ const ContactUs = () => {
           <h3 style="color: #08222B; margin-top: 24px;">Contact Form Details:</h3>
           <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; width: 40%;"><strong>First Name:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.first_name || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; width: 40%;"><strong>First Name</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.first_name) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Last Name:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.last_name || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Last Name</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.last_name) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Phone Number:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.mobile_number || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Phone Number</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.mobile_number) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Email Id:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.email || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Email Id</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.email) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Organisation Name:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.organisation_name || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Organisation Name</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.organisation_name) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Street Address:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.street_address || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Street Address</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.street_address) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>City:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.city || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>City</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.city) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>State:</strong></td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${formData.state || 'Not provided'}</td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>State</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${escapeHtml(formData.state) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Requirement:</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Requirement</strong></td>
               <td style="padding: 10px; border: 1px solid #ddd;">${formatTextareaForEmail(formData.requirement) || 'Not provided'}</td>
             </tr>
             ${formData.cad_file ? `<tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>CAD file (with dimensions and UOM):</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>CAD file (with dimensions and UOM)</strong></td>
               <td style="padding: 10px; border: 1px solid #ddd;">
-                ${formData.cad_file.name} (${(formData.cad_file.size / 1024 / 1024).toFixed(2)} MB)<br/>
-                <span style="color: #666; font-size: 12px;">File has been saved on the server and attached to this email.</span>
+                ${escapeHtml(formData.cad_file.name)} (${(formData.cad_file.size / 1024 / 1024).toFixed(2)} MB)<br/>
+                <span style="color: #666; font-size: 12px;">File has been attached to this email.</span>
               </td>
-            </tr>` : '<tr><td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>CAD file (with dimensions and UOM):</strong></td><td style="padding: 10px; border: 1px solid #ddd;">Not provided</td></tr>'}
+            </tr>` : '<tr><td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>CAD file (with dimensions and UOM)</strong></td><td style="padding: 10px; border: 1px solid #ddd;">Not provided</td></tr>'}
             ${formData.rfq_file ? `<tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Copy of RFQ/Contract with applicable clauses:</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Copy of RFQ/Contract with applicable clauses</strong></td>
               <td style="padding: 10px; border: 1px solid #ddd;">
-                ${formData.rfq_file.name} (${(formData.rfq_file.size / 1024 / 1024).toFixed(2)} MB)<br/>
-                <span style="color: #666; font-size: 12px;">File has been saved on the server and attached to this email.</span>
+                ${escapeHtml(formData.rfq_file.name)} (${(formData.rfq_file.size / 1024 / 1024).toFixed(2)} MB)<br/>
+                <span style="color: #666; font-size: 12px;">File has been attached to this email.</span>
               </td>
-            </tr>` : '<tr><td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Copy of RFQ/Contract with applicable clauses:</strong></td><td style="padding: 10px; border: 1px solid #ddd;">Not provided</td></tr>'}
+            </tr>` : '<tr><td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Copy of RFQ/Contract with applicable clauses</strong></td><td style="padding: 10px; border: 1px solid #ddd;">Not provided</td></tr>'}
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Estimated volume for the next 18-24 months (Please include the tentative release schedule):</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Estimated volume for the next 18-24 months (Please include the tentative release schedule)</strong></td>
               <td style="padding: 10px; border: 1px solid #ddd;">${formatTextareaForEmail(formData.estimated_volume) || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Please include the tentative order release date:</strong></td>
+              <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Please include the tentative order release date</strong></td>
               <td style="padding: 10px; border: 1px solid #ddd;">${formatTextareaForEmail(formData.order_release_date) || 'Not provided'}</td>
             </tr>
           </table>
           <p style="margin-top: 24px; color: #666; font-size: 12px;">
-            <strong>Note:</strong> All uploaded files have been saved on the server and are attached to this email for your reference.
+            <strong>Note:</strong> All uploaded files have been attached to this email for your reference.
           </p>
           <p style="margin-top: 16px; color: #666;">This is an automated notification from the Laxmi Electronics website.</p>
         </div>
@@ -845,7 +858,21 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    const validationResult = validateForm();
+    if (!validationResult.isValid) {
+      // Focus on the first error field
+      if (validationResult.firstErrorField) {
+        const fieldName = validationResult.firstErrorField;
+        const fieldElement = document.querySelector(`[name="${fieldName}"]`);
+        if (fieldElement) {
+          // Scroll to the field
+          fieldElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Focus the field after a short delay to ensure scroll completes
+          setTimeout(() => {
+            fieldElement.focus();
+          }, 300);
+        }
+      }
       return;
     }
 
@@ -867,30 +894,33 @@ const ContactUs = () => {
         console.warn('Form submission warning:', emailResult.warning);
       }
       
-      // On successful submission
-      setIsSubmitted(true);
-      setIsSubmitting(false);
-
-      // Reset form fields after successful submission
-      setFormData({
-        first_name: '',
-        last_name: '',
-        mobile_number: '',
-        email: '',
-        organisation_name: '',
-        street_address: '',
-        city: '',
-        state: '',
-        requirement: '',
-        estimated_volume: '',
-        order_release_date: '',
-        cad_file: null,
-        rfq_file: null,
-      });
-      setFormErrors({});
-
-      // Keep the form read-only after success (prevents multiple submissions)
+      // On successful submission - keep loader visible, show success modal, then disable form
+      // Show success modal immediately
       setShowSuccessModal(true);
+      
+      // Keep loader visible briefly while modal appears, then disable form and reset fields
+      setTimeout(() => {
+        setIsSubmitted(true);
+        setIsSubmitting(false);
+        
+        // Reset form fields after successful submission
+        setFormData({
+          first_name: '',
+          last_name: '',
+          mobile_number: '',
+          email: '',
+          organisation_name: '',
+          street_address: '',
+          city: '',
+          state: '',
+          requirement: '',
+          estimated_volume: '',
+          order_release_date: '',
+          cad_file: null,
+          rfq_file: null,
+        });
+        setFormErrors({});
+      }, 300);
     } catch (error) {
       console.error('Form submission error:', error);
       setIsSubmitting(false);
@@ -902,6 +932,15 @@ const ContactUs = () => {
 
   return (
     <div className="w-full">
+      {/* Full-page submit loader overlay */}
+      {isSubmitting && (
+        <div className="contact-form-loader-overlay" aria-hidden="true">
+          <div className="contact-form-loader-content">
+            <span className="contact-form-loader-spinner" aria-hidden="true"></span>
+            <span className="contact-form-loader-text">Submitting...</span>
+          </div>
+        </div>
+      )}
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
@@ -976,7 +1015,8 @@ const ContactUs = () => {
 
             {/* Form - Right Side */}
             <div id="form" className="contact-form-wrapper reveal reveal-right delay-200">
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <p className="contact-form-mandatory-note">* Fields are mandatory</p>
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
               {/* First Name and Last Name Row */}
               <div className="contact-form-row">
                 <label className="contact-form-field">
@@ -996,9 +1036,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.first_name && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.first_name}
-                      </span>
+                      <span className="contact-form-error">{formErrors.first_name}</span>
                     )}
                   </div>
                 </label>
@@ -1019,9 +1057,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.last_name && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.last_name}
-                      </span>
+                      <span className="contact-form-error">{formErrors.last_name}</span>
                     )}
                   </div>
                 </label>
@@ -1046,9 +1082,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.mobile_number && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.mobile_number}
-                      </span>
+                      <span className="contact-form-error">{formErrors.mobile_number}</span>
                     )}
                   </div>
                 </label>
@@ -1068,9 +1102,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.email && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.email}
-                      </span>
+                      <span className="contact-form-error">{formErrors.email}</span>
                     )}
                   </div>
                 </label>
@@ -1095,9 +1127,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.organisation_name && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.organisation_name}
-                      </span>
+                      <span className="contact-form-error">{formErrors.organisation_name}</span>
                     )}
                   </div>
                 </label>
@@ -1117,9 +1147,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.street_address && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.street_address}
-                      </span>
+                      <span className="contact-form-error">{formErrors.street_address}</span>
                     )}
                   </div>
                 </label>
@@ -1144,9 +1172,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.city && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.city}
-                      </span>
+                      <span className="contact-form-error">{formErrors.city}</span>
                     )}
                   </div>
                 </label>
@@ -1167,9 +1193,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     />
                     {formErrors.state && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.state}
-                      </span>
+                      <span className="contact-form-error">{formErrors.state}</span>
                     )}
                   </div>
                 </label>
@@ -1194,9 +1218,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     ></textarea>
                     {formErrors.requirement && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.requirement}
-                      </span>
+                      <span className="contact-form-error">{formErrors.requirement}</span>
                     )}
                   </div>
                 </label>
@@ -1232,7 +1254,7 @@ const ContactUs = () => {
                       </div>
                     )}
                     {formErrors.cad_file && (
-                      <div className="mt-2 text-sm text-red-600 font-medium">
+                      <div className="contact-form-error mt-2 text-sm font-medium">
                         ✗ {formErrors.cad_file}
                       </div>
                     )}
@@ -1269,7 +1291,7 @@ const ContactUs = () => {
                       </div>
                     )}
                     {formErrors.rfq_file && (
-                      <div className="mt-2 text-sm text-red-600 font-medium">
+                      <div className="contact-form-error mt-2 text-sm font-medium">
                         ✗ {formErrors.rfq_file}
                       </div>
                     )}
@@ -1299,9 +1321,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     ></textarea>
                     {formErrors.estimated_volume && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.estimated_volume}
-                      </span>
+                      <span className="contact-form-error">{formErrors.estimated_volume}</span>
                     )}
                   </div>
                 </label>
@@ -1326,9 +1346,7 @@ const ContactUs = () => {
                       disabled={isSubmitting || isSubmitted}
                     ></textarea>
                     {formErrors.order_release_date && (
-                      <span style={{ color: '#ff0000', fontSize: '12px', marginTop: '4px', display: 'block' }}>
-                        {formErrors.order_release_date}
-                      </span>
+                      <span className="contact-form-error">{formErrors.order_release_date}</span>
                     )}
                   </div>
                 </label>
@@ -1492,7 +1510,10 @@ Bangalore 560 066, INDIA
       {/* Success Modal */}
       <SuccessModal
         isOpen={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
+        onClose={() => {
+          setShowSuccessModal(false);
+          setIsSubmitted(false); // Re-enable form fields when modal is closed
+        }}
         message={successMessage}
         title={successTitle}
       />

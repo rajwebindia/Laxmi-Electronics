@@ -82,7 +82,7 @@ const Locations = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden locations-hero-section">
         {/* Background Image */}
         <div className="absolute inset-0 rounded-none">
           <img

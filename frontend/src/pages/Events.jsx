@@ -306,10 +306,10 @@ const Events = () => {
                     slideUpRefs.current[refIndex] = el;
                   }}
                 >
-                  {/* Event Image */}
-                  <div className="relative h-48 w-full overflow-hidden">
+                  {/* Event Image - full image on 1024px; fixed height/cover from 1280px */}
+                  <div className="relative h-auto xl:h-48 w-full overflow-hidden">
                     <img
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-contain xl:object-cover group-hover:scale-110 transition-transform duration-500"
                       src={event.image}
                       alt={event.title}
                       onError={(e) => {

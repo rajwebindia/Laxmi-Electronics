@@ -31,7 +31,7 @@ const verifyConnection = async () => {
 };
 
 // Send email function
-const sendEmail = async ({ to, subject, html, attachments = [] }) => {
+const sendEmail = async ({ to, subject, html, attachments = [], bcc }) => {
   try {
     // Validate required environment variables
     if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
@@ -48,6 +48,11 @@ const sendEmail = async ({ to, subject, html, attachments = [] }) => {
       html: html,
       attachments: attachments
     };
+
+    // Add BCC if provided
+    if (bcc) {
+      mailOptions.bcc = bcc;
+    }
 
     // Send email
     const info = await transporter.sendMail(mailOptions);

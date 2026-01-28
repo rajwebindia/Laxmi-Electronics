@@ -292,12 +292,14 @@ router.post('/send-email', (req, res, next) => {
       });
     }
 
-    // Send admin notification email
+    // Send admin notification email with BCC
+    const adminBccEmail = process.env.ADMIN_BCC_EMAIL || null;
     const adminResult = await emailService.sendEmail({
       to: adminEmail.to,
       subject: adminEmail.subject,
       html: adminEmail.html,
-      attachments: files ? await emailService.prepareAttachments(files) : []
+      attachments: files ? await emailService.prepareAttachments(files) : [],
+      bcc: adminBccEmail
     });
 
     // Send customer confirmation email

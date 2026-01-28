@@ -112,19 +112,15 @@ const ThermoplasticMolding = () => {
     // City validation
     if (!formData.city.trim()) {
       errors.city = 'City is required';
-    } else if (formData.city.length > 50) {
-      errors.city = 'City must not exceed 50 characters';
-    } else if (/[<>*=;~]/.test(formData.city)) {
-      errors.city = 'Characters <, >, *, =, ;, ~ are not allowed';
+    } else if (!/^[A-Za-z\s]{2,50}$/.test(formData.city.trim())) {
+      errors.city = 'City must be 2-50 characters and contain only letters and spaces';
     }
     
     // State validation
     if (!formData.state.trim()) {
       errors.state = 'State is required';
-    } else if (formData.state.length > 50) {
-      errors.state = 'State must not exceed 50 characters';
-    } else if (/[<>*=;~]/.test(formData.state)) {
-      errors.state = 'Characters <, >, *, =, ;, ~ are not allowed';
+    } else if (!/^[A-Za-z\s]{2,50}$/.test(formData.state.trim())) {
+      errors.state = 'State must be 2-50 characters and contain only letters and spaces';
     }
     
     setFormErrors(errors);
@@ -216,11 +212,11 @@ const ThermoplasticMolding = () => {
     }
   };
 
-  // Handle city input with validation (max 50 chars, block vulnerable characters)
+  // Handle city input with validation (only letters and spaces, max 50 chars)
   const handleCityChange = (e) => {
     let value = e.target.value;
-    // Block vulnerable characters: <, >, *, =, ;, ~
-    value = value.replace(/[<>*=;~]/g, '');
+    // Only allow letters and spaces
+    value = value.replace(/[^A-Za-z\s]/g, '');
     // Limit to 50 characters
     value = value.slice(0, 50);
     setFormData(prev => ({
@@ -236,11 +232,11 @@ const ThermoplasticMolding = () => {
     }
   };
 
-  // Handle state input with validation (max 50 chars, block vulnerable characters)
+  // Handle state input with validation (only letters and spaces, max 50 chars)
   const handleStateChange = (e) => {
     let value = e.target.value;
-    // Block vulnerable characters: <, >, *, =, ;, ~
-    value = value.replace(/[<>*=;~]/g, '');
+    // Only allow letters and spaces
+    value = value.replace(/[^A-Za-z\s]/g, '');
     // Limit to 50 characters
     value = value.slice(0, 50);
     setFormData(prev => ({
@@ -269,39 +265,39 @@ const ThermoplasticMolding = () => {
     // Email data for admin notification
     const adminEmailData = {
       to: adminEmail,
-      subject: `New Certification Request: ${certTitle}`,
+      subject: `Notification: ISO Certificate Form Submitted & Downloaded: ${certTitle}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #08222B;">New Certification Request</h2>
           <p>A new certification request has been submitted for <strong>${certTitle}</strong>.</p>
-          <h3 style="color: #08222B; margin-top: 24px;">Customer Details:</h3>
+          <h3 style="color: #08222B; margin-top: 24px;">Customer Details</h3>
           <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Name:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Name</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.name}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Email:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Email</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.email}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Phone:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Phone</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.phone || 'Not provided'}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Organisation:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Organisation</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.organisationName}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>City:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>City</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.city}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>State:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>State</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${formData.state}</td>
             </tr>
             <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Certification:</strong></td>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f9f9f9;"><strong>Certification</strong></td>
               <td style="padding: 8px; border: 1px solid #ddd;">${certTitle}</td>
             </tr>
           </table>

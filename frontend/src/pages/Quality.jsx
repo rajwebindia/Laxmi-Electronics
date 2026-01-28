@@ -393,7 +393,6 @@ const Quality = () => {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.error('Email notification error:', error);
       // Don't throw error - allow form submission to succeed even if email fails
       // You can optionally show a warning to the user
       return null;
@@ -435,7 +434,6 @@ const Quality = () => {
       // Close the certification modal and show success message inside it
       // No need to show separate SuccessModal - the success message is already in the modal
     } catch (error) {
-      console.error('Form submission error:', error);
       setIsSubmitting(false);
       setSuccessTitle('Submission Error');
       setSuccessMessage(`There was an error submitting your form: ${error.message || 'Please try again or contact us directly at marketing@laxmielectronics.com'}`);

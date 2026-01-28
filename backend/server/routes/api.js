@@ -222,8 +222,8 @@ router.post('/send-email', (req, res, next) => {
       const [result] = await pool.query(
         `INSERT INTO form_submissions 
          (form_type, name, email, phone, message, organisation_name, street_address, city, state, 
-          requirement, estimated_volume, order_release_date, cad_file, rfq_file, certification_type, ip_address, user_agent)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          requirement, estimated_volume, order_release_date, cad_file, rfq_file, certification_type, ip_address, user_agent, submitted_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
         insertData
       );
       submissionId = result.insertId;

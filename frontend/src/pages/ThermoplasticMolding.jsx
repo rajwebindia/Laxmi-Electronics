@@ -370,7 +370,6 @@ const ThermoplasticMolding = () => {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.error('Email notification error:', error);
       return {
         success: false,
         error: error.message || 'Failed to send email. Please check if the server is running.'
@@ -413,7 +412,6 @@ const ThermoplasticMolding = () => {
       // Success message is shown inside the certification modal (isSubmitted state)
       // No need to show separate SuccessModal popup
     } catch (error) {
-      console.error('Form submission error:', error);
       setIsSubmitting(false);
       setSuccessTitle('Submission Error');
       setSuccessMessage(`There was an error submitting your form: ${error.message || 'Please try again or contact us directly at marketing@laxmielectronics.com'}`);

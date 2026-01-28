@@ -40,7 +40,6 @@ export const executeRecaptcha = async (action) => {
   try {
     return await window.grecaptcha.execute(recaptchaSiteKey, { action });
   } catch (error) {
-    console.error('reCAPTCHA execution failed:', error);
     return null;
   }
 };

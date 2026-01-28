@@ -54,7 +54,6 @@ const AdminDashboard = () => {
       }
       setLoading(false);
     } catch (error) {
-      console.error('Error parsing user data:', error);
       localStorage.removeItem('adminToken');
       localStorage.removeItem('adminUser');
       navigate('/admin/login');
@@ -115,7 +114,6 @@ const AdminDashboard = () => {
         setTotalPages(data.pagination.totalPages);
       }
     } catch (error) {
-      console.error('Error fetching submissions:', error);
     }
   };
 
@@ -147,7 +145,6 @@ const AdminDashboard = () => {
         setStats(data.stats);
       }
     } catch (error) {
-      console.error('Error fetching stats:', error);
     }
   };
 
@@ -179,7 +176,6 @@ const AdminDashboard = () => {
         setSeoData(data.data);
       }
     } catch (error) {
-      console.error('Error fetching SEO data:', error);
     }
   };
 
@@ -209,7 +205,6 @@ const AdminDashboard = () => {
         alert('SEO metadata saved successfully!');
       }
     } catch (error) {
-      console.error('Error saving SEO:', error);
       alert('Error saving SEO metadata');
     }
   };
@@ -237,7 +232,6 @@ const AdminDashboard = () => {
         alert(data.message || 'Error initializing SEO metadata');
       }
     } catch (error) {
-      console.error('Error initializing SEO:', error);
       alert('Error initializing SEO metadata. Please run `npm run init:seo` from the command line.');
     }
   };
@@ -288,7 +282,6 @@ const AdminDashboard = () => {
         setEmailTemplates(templatesData.data || []);
       }
     } catch (error) {
-      console.error('Error fetching settings:', error);
     }
   };
 
@@ -313,7 +306,6 @@ const AdminDashboard = () => {
         alert(data.message || 'Error saving SMTP settings');
       }
     } catch (error) {
-      console.error('Error saving SMTP:', error);
       alert('Error saving SMTP settings');
     }
   };
@@ -340,7 +332,6 @@ const AdminDashboard = () => {
         alert(data.message || 'Error saving email template');
       }
     } catch (error) {
-      console.error('Error saving template:', error);
       alert('Error saving email template');
     }
   };
@@ -380,7 +371,7 @@ const AdminDashboard = () => {
       const filterText = `${dateFilterText}${formTypeText}${searchText}` || '-all';
       
       const csv = [
-        ['ID', 'Name', 'Email', 'Phone', 'Form Type', 'Organisation', 'City', 'State', 'Message', 'Requirement', 'Submitted Date'].join(','),
+        ['ID', 'Name', 'Email', 'Phone', 'Form Type', 'Organisation', 'City', 'State', 'Message', 'Requirement', 'Submitted Date & Time', 'CAD File', 'RFQ File'].join(','),
         ...filteredData.map(s => [
           s.id,
           s.name || '',
@@ -392,8 +383,10 @@ const AdminDashboard = () => {
           s.state || '',
           (s.message || '').replace(/"/g, '""'),
           (s.requirement || '').replace(/"/g, '""'),
-          s.submitted_at
-        ].map(field => `"${String(field)}"`).join(','))
+          s.submitted_at ? new Date(s.submitted_at).toLocaleString() : '',
+          s.cad_file ? (s.cad_file.split('/').pop() || s.cad_file) : '',
+          s.rfq_file ? (s.rfq_file.split('/').pop() || s.rfq_file) : ''
+        ].map(field => `"${String(field || '')}"`).join(','))
       ].join('\n');
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -406,7 +399,6 @@ const AdminDashboard = () => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Export error:', error);
       alert('Error exporting data. Please try again.');
     }
   };
@@ -932,14 +924,15 @@ const AdminDashboard = () => {
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Form Type</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attachments</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {submissions.length === 0 ? (
                         <tr>
-                          <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
+                          <td colSpan="8" className="px-6 py-4 text-center text-gray-500">
                             No submissions found
                           </td>
                         </tr>
@@ -956,6 +949,11 @@ const AdminDashboard = () => {
                               </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDate(submission.submitted_at)}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {[submission.cad_file, submission.rfq_file].filter(Boolean).length > 0
+                                ? [submission.cad_file && 'CAD', submission.rfq_file && 'RFQ'].filter(Boolean).join(', ')
+                                : '—'}
+                            </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                               <button
                                 onClick={() => setSelectedSubmission(submission)}
@@ -1495,7 +1493,7 @@ const AdminDashboard = () => {
                       </tr>
                     )}
                     <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Submitted At</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Submitted Date & Time</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{formatDate(selectedSubmission.submitted_at)}</td>
                     </tr>
                     {selectedSubmission.ip_address && (

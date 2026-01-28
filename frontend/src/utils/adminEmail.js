@@ -15,7 +15,6 @@ export const getAdminEmail = async () => {
       return cachedAdminEmail;
     }
   } catch (error) {
-    console.warn('Failed to fetch admin email from server:', error);
   }
 
   // Fallback to default

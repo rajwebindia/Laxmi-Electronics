@@ -1,5 +1,4 @@
 const mysql = require('mysql2/promise');
-require('dotenv').config();
 
 // Database configuration
 const dbConfig = {
@@ -21,11 +20,9 @@ const pool = mysql.createPool(dbConfig);
 const testConnection = async () => {
   try {
     const connection = await pool.getConnection();
-    console.log('✅ Database connected successfully');
     connection.release();
     return true;
   } catch (error) {
-    console.error('❌ Database connection failed:', error.message);
     return false;
   }
 };
@@ -104,10 +101,8 @@ const initializeDatabase = async () => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
 
-    console.log('✅ Database tables initialized successfully');
     return true;
   } catch (error) {
-    console.error('❌ Database initialization failed:', error);
     return false;
   }
 };

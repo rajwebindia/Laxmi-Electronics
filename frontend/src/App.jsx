@@ -67,7 +67,6 @@ function RevealAnimations() {
         }
       });
     } catch (error) {
-      console.error('Error resetting reveal animations:', error);
     }
 
     // Small delay to ensure DOM is ready after route change
@@ -110,7 +109,6 @@ function RevealAnimations() {
           });
         });
       } catch (error) {
-        console.error('Error setting up reveal animations:', error);
       }
     }, 50);
 

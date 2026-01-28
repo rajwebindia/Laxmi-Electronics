@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { executeRecaptcha } from '../utils/recaptcha';
+import { ADMIN_LOGIN_URL } from '../utils/api';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -23,8 +24,13 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const recaptchaToken = await executeRecaptcha('admin_login');
-      const response = await fetch('/api/admin/login', {
+      let recaptchaToken = null;
+      try {
+        recaptchaToken = await executeRecaptcha('admin_login');
+      } catch (_) {
+        // reCAPTCHA can fail (e.g. cross-origin frame on live site); login still works without it
+      }
+      const response = await fetch(ADMIN_LOGIN_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,9 +38,18 @@ const AdminLogin = () => {
         body: JSON.stringify({ username, password, recaptchaToken, recaptchaAction: 'admin_login' }),
       });
 
+      const contentType = response.headers.get('content-type') || '';
+      const isJson = contentType.includes('application/json');
+
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: 'Login failed' }));
-        setError(errorData.message || `Server error: ${response.status}`);
+        const errorData = isJson ? await response.json().catch(() => ({})) : {};
+        const message = errorData.message || (response.status === 500 ? 'Server error. Please try again.' : `Server error: ${response.status}`);
+        setError(message);
+        return;
+      }
+
+      if (!isJson) {
+        setError('Server returned an invalid response. Please check that the API is reachable at this domain.');
         return;
       }
 
@@ -48,11 +63,12 @@ const AdminLogin = () => {
         setError(data.message || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
-      console.error('Login error:', error);
-      if (error.message.includes('fetch')) {
-        setError('Cannot connect to server. Please make sure the backend server is running on port 3001.');
+      if (error instanceof SyntaxError && error.message.includes('JSON')) {
+        setError('Server returned an invalid response. Ensure /api is served by the backend on this domain.');
+      } else if (error.message && error.message.includes('fetch')) {
+        setError('Cannot connect to server. Please check your connection.');
       } else {
-        setError('Network error. Please check if the server is running.');
+        setError('Login failed. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -120,13 +136,6 @@ const AdminLogin = () => {
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
-
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>Default credentials:</p>
-            <p className="font-mono text-xs mt-1">Username: admin</p>
-            <p className="font-mono text-xs">Password: admin123</p>
-            <p className="text-red-600 mt-2">⚠️ Change default password after first login</p>
-          </div>
         </div>
       </div>
     </div>

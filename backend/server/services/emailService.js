@@ -40,9 +40,12 @@ const sendEmail = async ({ to, subject, html, attachments = [], bcc }) => {
 
     const transporter = createTransporter();
 
-    // Email options
+    // All form emails sent from smtp@laxmielectronics.com
+    const fromEmail = process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || 'smtp@laxmielectronics.com';
+    const fromName = process.env.SMTP_FROM_NAME || 'Laxmi Electronics';
+
     const mailOptions = {
-      from: `"${process.env.SMTP_FROM_NAME || 'Laxmi Electronics'}" <${process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER}>`,
+      from: `"${fromName}" <${fromEmail}>`,
       to: to,
       subject: subject,
       html: html,

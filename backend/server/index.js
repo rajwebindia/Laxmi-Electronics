@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
+// Load root .env first (for DB_*, SMTP when running from backend folder), then backend .env overrides
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 require('dotenv').config();
 const emailService = require('./services/emailService');
 const { testConnection, initializeDatabase } = require('./config/database');
@@ -10,7 +12,7 @@ const seoRoutes = require('./routes/seo');
 const apiRoutes = require('./routes/api');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(helmet({

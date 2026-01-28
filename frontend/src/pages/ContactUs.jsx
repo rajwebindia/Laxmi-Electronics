@@ -386,8 +386,6 @@ const ContactUs = () => {
     // Check MIME type if available
     if (file.type && !allowedMimeTypes.includes(file.type)) {
       // Some browsers may not set MIME type correctly, so we'll rely on extension check
-      // But if MIME type is set and doesn't match, show warning
-      console.warn('File MIME type may not match expected type:', file.type);
     }
 
     // File is valid
@@ -469,8 +467,6 @@ const ContactUs = () => {
     // Check MIME type if available
     if (file.type && !allowedMimeTypes.includes(file.type)) {
       // Some browsers may not set MIME type correctly, so we'll rely on extension check
-      // But if MIME type is set and doesn't match, show warning
-      console.warn('File MIME type may not match expected type:', file.type);
     }
 
     // File is valid
@@ -806,13 +802,6 @@ const ContactUs = () => {
         formDataToSend.append('recaptchaAction', 'contact_submit');
       }
       
-      // Debug log
-      console.log('📤 Sending form data:', {
-        email: formData.email,
-        name: formDataForDB.name,
-        formType: 'contact'
-      });
-      
       // Call API endpoint to send emails with file uploads
       const response = await fetch('/api/send-email', {
         method: 'POST',
@@ -845,7 +834,6 @@ const ContactUs = () => {
 
       return result;
     } catch (error) {
-      console.error('Email notification error:', error);
       // Return error details so we can show them to the user
       return {
         success: false,
@@ -886,14 +874,6 @@ const ContactUs = () => {
       setSuccessTitle('Thank You!');
       setSuccessMessage('Thank you! Your form has been submitted successfully. We will be in touch soon.');
       
-      // Log warnings to console but don't show to user
-      if (emailResult && !emailResult.success) {
-        console.warn('Email sending failed:', emailResult.error);
-      }
-      if (emailResult && emailResult.warning) {
-        console.warn('Form submission warning:', emailResult.warning);
-      }
-      
       // On successful submission - keep loader visible, show success modal, then disable form
       // Show success modal immediately
       setShowSuccessModal(true);
@@ -922,7 +902,6 @@ const ContactUs = () => {
         setFormErrors({});
       }, 300);
     } catch (error) {
-      console.error('Form submission error:', error);
       setIsSubmitting(false);
       setSuccessTitle('Submission Error');
       setSuccessMessage(`There was an error submitting your form: ${error.message || 'Please try again or contact us directly at marketing@laxmielectronics.com'}`);

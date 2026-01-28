@@ -478,8 +478,6 @@ const Home = () => {
       // Return result even if some emails failed - warnings are acceptable
       return result;
     } catch (error) {
-      console.error('Email notification error:', error);
-      console.error('API Endpoint used:', EMAIL_API_ENDPOINT);
       
       // Detect different types of errors
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
@@ -579,7 +577,6 @@ const Home = () => {
               void container.offsetHeight;
             }
           } catch (error) {
-            console.error('Error setting carousel scroll position:', error);
           }
         });
       });
@@ -597,7 +594,6 @@ const Home = () => {
       try {
         carouselRef.current.scrollLeft = 0;
       } catch (error) {
-        console.error('Error resetting carousel scroll:', error);
       }
       return;
     }
@@ -613,7 +609,6 @@ const Home = () => {
     try {
       container.scrollLeft = 0;
     } catch (error) {
-      console.error('Error resetting carousel scroll:', error);
     }
 
     // Wait for cards to render and browser scroll restoration to complete
@@ -669,7 +664,6 @@ const Home = () => {
                     container.scrollLeft = startPosition;
                   }
                 } catch (error) {
-                  console.error('Error in carousel scroll handler:', error);
                 } finally {
                   isAdjusting = false;
                 }
@@ -686,14 +680,12 @@ const Home = () => {
                     container.scrollLeft = lastOriginalPosition;
                   }
                 } catch (error) {
-                  console.error('Error in carousel scroll handler:', error);
                 } finally {
                   isAdjusting = false;
                 }
               });
             }
           } catch (error) {
-            console.error('Error in carousel scroll handler:', error);
           }
         };
 
@@ -701,7 +693,6 @@ const Home = () => {
           container.addEventListener('scroll', handleScroll, { passive: true });
         }
       } catch (error) {
-        console.error('Error initializing carousel:', error);
       }
     }, 200);
 
@@ -1624,20 +1615,12 @@ const Home = () => {
                     setFormErrors({});
                     
                     // Log warnings to console but don't show to user
-                    if (emailResult && !emailResult.success) {
-                      console.warn('Email sending failed:', emailResult.error);
-                    }
-                    if (emailResult && emailResult.warning) {
-                      console.warn('Form submission warning:', emailResult.warning);
-                    }
                     
                     // Only throw error if there's a critical failure (not just warnings)
                     if (emailResult && emailResult.error && !emailResult.success && !emailResult.warning) {
                       throw new Error(emailResult.error);
                     }
                   } catch (error) {
-                    console.error('Form submission error:', error);
-                    console.error('API Endpoint:', EMAIL_API_ENDPOINT);
                     setIsSubmitting(false);
                     const errorMessage = error.message || 'Unknown error occurred';
                     setSuccessTitle('Submission Error');
